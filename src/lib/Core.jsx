@@ -11,7 +11,7 @@ import Explanation from './core-components/Explanation';
 function Core({
   questions, appLocale, showDefaultResult, onComplete, customResultPage,
   showInstantFeedback, continueTillCorrect, revealAnswerOnSubmit, allowNavigation,
-  onQuestionSubmit, timer, allowPauseTimer, enableProgressBar, progressBarColor,
+  onQuestionSubmit, timer, allowPauseTimer, enableProgressBar, progressBarColor, quizName
 }) {
   const [incorrectAnswer, setIncorrectAnswer] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -390,33 +390,38 @@ function Core({
           <br />
         </>
       )}
-      {timer && !isRunning && (
-        <div>
-          {appLocale.timerTimeTaken}
-          :
-          {' '}
-          <b>{displayTime(timer - timeRemaining)}</b>
-        </div>
-      )}
+      <div className="quizNameWrapper">
+        {quizName ? <span className="quizName">{quizName}</span> : null}
+          {timer && !isRunning && (
+          <div>
+            {appLocale.timerTimeTaken}
+            :
+            {' '}
+            <b>{displayTime(timer - timeRemaining)}</b>
+          </div>
+        )}
 
-      {timer && isRunning && (
-        <div>
-          {appLocale.timerTimeRemaining}
-          :
-          {' '}
-          <b>
-            {displayTime(timeRemaining)}
-          </b>
-        </div>
-      )}
+        {timer && isRunning && (
+          <div>
+            {appLocale.timerTimeRemaining}
+            :
+            {' '}
+            <b>
+              {displayTime(timeRemaining)}
+            </b>
+          </div>
+        )}
+      </div>
+      
       {timer && timeRemaining === 0 && isRunning && handleTimeUp()}
 
       {!endQuiz && (
         <div className="questionWrapperBody">
-          <div>
-            {`${appLocale.question} ${currentQuestionIndex + 1} / ${
+          <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+            <span>{`${appLocale.question} ${currentQuestionIndex + 1} / ${
               questions.length
             }:`}
+            </span>
             <br />
             {timer && allowPauseTimer && (
               <button type="button" className="timerBtn" onClick={toggleTimer}>

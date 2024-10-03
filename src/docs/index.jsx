@@ -23,6 +23,7 @@ function App() {
         timer={60}
         allowPauseTimer
         enableProgressBar
+        quizName="This is quiz name"
       />
     </div>
   );

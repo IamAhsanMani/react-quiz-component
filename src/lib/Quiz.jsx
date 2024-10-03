@@ -19,6 +19,7 @@ function Quiz({
   timer,
   allowPauseTimer,
   enableProgressBar,
+  quizName
 }) {
   const [start, setStart] = useState(false);
   const [questions, setQuestions] = useState(quiz.questions);
@@ -247,6 +248,7 @@ function Quiz({
           allowPauseTimer={allowPauseTimer}
           enableProgressBar={enableProgressBar}
           progressBarColor={quiz.progressBarColor}
+          quizName={quizName}
         />
       )}
     </div>
